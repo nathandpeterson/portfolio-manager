@@ -1,9 +1,38 @@
+const tempDefs = `
+type Query {
+  items: [Item!]!
+}
+type Item {
+  name: String!
+}
+`
+
+const moreSchema =  `type Album
+id: ID!,
+album_name: String!,
+album_description: String,
+images: [Image],
+user: User
+type Image {
+      id: ID!,
+      name: String,
+      description: String,
+      size: String,
+      date: String,
+      album: Album,
+      user: User
+}
+`
+
 const typeDefs = `
   type Query {
-    items: [Item!]!
+    users: [User!],
+    user(id: ID!): [User!]
   }
-  type Item {
-    name: String!
+  type User {
+    id: ID!,
+    first_name: String!,
+    last_name: String
   }
   `
   module.exports = typeDefs

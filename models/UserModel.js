@@ -1,20 +1,20 @@
-const db = require('knex')
+const db = require('../db/knex.js')
 
 class UserModel {
 
-  static create = (data) => {
+  static create(data) {
     return db('users').insert(data)
   }
 
-  static getAll = () => {
+  static getAll(){
     return db('users')
   }
 
-  static getOne = (id) => {
+  static getOne(id){
     return db('users').where({id}).first()
   }
 
-  static updateUser = (userData) => {
+  static updateUser(userData){
     const {id} = userData
     return db('users').where({id}).update(userData)
   }

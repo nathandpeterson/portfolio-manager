@@ -1,4 +1,4 @@
-const db = require('knex')
+const db = require('../db/knex.js')
 
 class ImageModel {
 
