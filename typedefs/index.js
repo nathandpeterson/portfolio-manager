@@ -1,45 +1,24 @@
-const tempDefs = `
-type Query {
-  items: [Item!]!
-}
-type Item {
-  name: String!
-}
-`
-
-const moreSchema =  `type Album
-id: ID!,
-album_name: String!,
-album_description: String,
-images: [Image],
-user: User
-type Image {
-      id: ID!,
-      name: String,
-      description: String,
-      size: String,
-      date: String,
-      album: Album,
-      user: User
-}
-`
-
 const typeDefs = `
   type Query {
     users: [User!],
-    user(id: ID!): User!
+    user(id: ID!): User!,
+    albums: [Album!],
+    album(id: ID!): Album!,
+    images: [Image!],
+    image(id: ID!): Image!
   }
   type User {
     id: ID!,
     first_name: String!,
-    last_name: String
+    last_name: String,
+    albums: [Album],
   }
   type Album {
     id: ID!,
     album_name: String!,
     album_description: String,
     images: [Image]
-  },
+  }
   type Image {
     id: ID!,
     name: String,

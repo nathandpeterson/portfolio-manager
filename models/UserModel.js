@@ -10,8 +10,13 @@ class UserModel {
     return db('users')
   }
 
-  static getOne(id){
-    return db('users').where({id}).first()
+  static async getOne(userId){
+    const user = await db('users').where({id: userId}).first()
+    const albums = await db('albums')
+                          .join('user_album', 'albums.id', 'user_album.album_id')
+                          .where({user_id: userId})
+    user.albums = albums
+    return user
   }
 
   static updateUser(userData){

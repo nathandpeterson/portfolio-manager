@@ -7,8 +7,8 @@ const resolvers = {
     users : () => UserModel.getAll(),
     user: (params, {id}) => UserModel.getOne(id),
     
-    album: () => AlbumModel.getAll(),
     albums: (params, {id}) => AlbumModel.getOne(id),
+    album: () => AlbumModel.getAll(),
 
     image: () => ImageModel.getAll(),
     images: (params, {id}) => ImageModel.getOne(id)

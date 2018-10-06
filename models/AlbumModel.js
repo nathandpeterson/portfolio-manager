@@ -2,25 +2,30 @@ const db = require('../db/knex.js')
 
 class AlbumModel {
 
-  static create = (data) => {
+  static create(data) {
     return db('albums').insert(data)
   }
 
-  static getAll = () => {
+  static getAll() {
     return db('albums')
   }
 
-  static getOne = (id) => {
-    return db('albums').where({id}).first()
-      .then()
+  static async getOne(albumId) {
+    const album = await db('albums').where({id : albumId}).first()
+    const images = await db('images')
+                            .join('album_image', 'images.id', 'album_image.image_id')
+                            .where({album_id: albumId})
+    album.images = images
+    console.log('album', album)
+    return album
   }
 
-  static updateAlbumData = (albumData) => {
+  static updateAlbumData(albumData) {
     const {id} = albumData
     return db('albums').where({id}).update(albumData)
   }
 
-  static deleteAlbumData = (id) => {
+  static deleteAlbumData(id) {
     return db('albums').where({id}).del()
   }
 
