@@ -3,6 +3,7 @@ exports.up = function(knex, Promise) {
   return knex.schema.createTable('images', table => {
     table.increments()
     table.string('name').notNullable().defaultsTo('')
+    table.string('location').notNullable().defaultsTo('')
     table.string('description').defaultsTo('')
     table.string('size').defaultsTo('')
     table.string('date').defaultsTo('')
