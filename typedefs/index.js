@@ -13,6 +13,7 @@ const typeDefs = `
     last_name: String,
     albums: [Album],
   }
+
   type Album {
     id: ID!,
     album_name: String!,
@@ -25,6 +26,17 @@ const typeDefs = `
     description: String,
     size: String,
     date: String
+}
+
+input UserData {
+  id: ID,
+  first_name: String,
+  last_name: String
+}
+
+type Mutation {
+  createUser(userData : UserData): User
+  updateUser(userData: UserData): User
 }
 `
   module.exports = typeDefs

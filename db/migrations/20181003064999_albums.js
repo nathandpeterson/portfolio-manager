@@ -4,6 +4,7 @@ exports.up = function(knex, Promise) {
     table.increments()
     table.string('album_name').notNullable().defaultsTo('')
     table.string('album_description').defaultsTo('')
+    table.integer('key_image_id')
     table.timestamps(true, true)
   })
 }

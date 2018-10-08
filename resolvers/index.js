@@ -7,13 +7,23 @@ const resolvers = {
     users : () => UserModel.getAll(),
     user: (params, {id}) => UserModel.getOne(id),
     
-    albums: (params, {id}) => AlbumModel.getOne(id),
-    album: () => AlbumModel.getAll(),
+    albums: () => AlbumModel.getAll(),
+    album: (params, {id}) =>  AlbumModel.getOne(id),
 
-    image: () => ImageModel.getAll(),
-    images: (params, {id}) => ImageModel.getOne(id)
+    image: (params, {id}) => ImageModel.getOne(id),
+    images: () => ImageModel.getAll()
   
   },
+  Mutation : {
+    createUser: (params, {userData}) => {
+      return UserModel.create(userData)
+        .then(res => {
+          console.log(res)
+          return res
+        })
+    },
+    updateUser: (params, input) => UserModel.updateUser(input)
+  }
 }
 
 

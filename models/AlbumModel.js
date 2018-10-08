@@ -16,7 +16,6 @@ class AlbumModel {
                             .join('album_image', 'images.id', 'album_image.image_id')
                             .where({album_id: albumId})
     album.images = images
-    console.log('album', album)
     return album
   }
 
