@@ -4,8 +4,8 @@ class Controller {
 
   static  async login(req, res, next){
     const authentication = await AuthModel.login(req.body)
-    const {status, message} = authentication
-    res.status(status).json({ message });
+    const {status, message, token} = authentication
+    res.status(status).json({ message, token });
   }
 }
 

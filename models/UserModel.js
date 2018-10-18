@@ -10,13 +10,18 @@ class UserModel {
     return db('users')
   }
 
-  static async getOne(userId){
-    const user = await db('users').where({id: userId}).first()
-    const albums = await db('albums')
-                          .join('user_album', 'albums.id', 'user_album.album_id')
-                          .where({user_id: userId})
-    user.albums = albums
-    return user
+  static async getOne(email){
+    try {
+      const user = await db('users').where({email}).first()
+      const albums = await db('albums')
+                            .join('user_album', 'albums.id', 'user_album.album_id')
+                            .where({user_id: user.id})
+      user.albums = albums
+      return user
+    } catch(error){
+      return {message: 'no such user', status: 400}
+    }
+    
   }
 
   static updateUser(userData){
