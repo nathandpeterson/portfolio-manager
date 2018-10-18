@@ -10,6 +10,8 @@ const cors = require('cors')
 app.use(cors())
 app.disable('x-powered-by')
 
+app.use('/api', require('./routes'))
+
 app.use('/', (req, res, next) => {
   res.json({message:'You hit the root route!'})
 })

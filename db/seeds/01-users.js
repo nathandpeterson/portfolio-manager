@@ -7,15 +7,17 @@ exports.seed = function(knex, Promise) {
       return knex('users').insert([
         { id: 1, 
           first_name: 'nathan', 
-          last_name: 'peterson', 
-          hashed_password: 'cornbread',
+          last_name: 'peterson',
+          email: 'natperson@gmail.com', 
+          hashed_password: 'password',
           role: 'DEVELOPER'
         },
         { id: 2, 
-          first_name: 'galen', 
-          last_name: 'longstreth', 
-          hashed_password: 'string-cheese',
-          role: 'USER'
+          first_name: 'Stephen', 
+          last_name: 'Rawls',
+          hashed_password: 'password', 
+          email: 's2rawls@gmail.com',
+          role: 'ADMIN'
         },
         { id: 3, 
           first_name: 'wren', 
