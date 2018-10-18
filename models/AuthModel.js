@@ -40,7 +40,12 @@ class AuthModel {
     const sub = {id: data.id, firstname: data.first_name}
     const expiresIn = `30 days`
     let newToken = `Bearer ` + jwt.sign({sub}, secret, {expiresIn})
-    return {userInfo: sub, token: newToken}
+    return newToken
+  }
+
+  static verifyToken(data){
+    const authentication = jwt.verify(data.token, secret)
+    return authentication
   }
 }
 
