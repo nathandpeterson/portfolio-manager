@@ -10,13 +10,7 @@ exports.seed = function(knex, Promise) {
         {album_id: 2, image_id: 3},
         {album_id: 2, image_id: 4},
         {album_id: 3, image_id: 5},
-        {album_id: 3, image_id: 6},
-        {album_id: 4, image_id: 7},
-        {album_id: 4, image_id: 8},
-        {album_id: 5, image_id: 9},
-        {album_id: 5, image_id: 10},
-        {album_id: 6, image_id: 11},
-        {album_id: 6, image_id: 12},
+        {album_id: 3, image_id: 6}
       ])
     })
 }
