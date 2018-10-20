@@ -31,7 +31,7 @@ class Controller {
 
   static async getAlbum(req, res, next){
     console.log('req params', req.params.id)
-    const result = await AlbumModel.getOne(req.params)
+    const result = await AlbumModel.getOne(req.params.id)
     return res.status(200).json(result)
   }
 }
