@@ -27,27 +27,47 @@ class Controller {
 
   static async getAlbums(req, res, next){
     const result = await AlbumModel.getAll()
-    return res.status(200).json(result)
+    return res.status(result.status || 200).json(result)
   }
 
   static async getAlbum(req, res, next){
     const result = await AlbumModel.getOne(req.params.id)
-    return res.status(200).json(result)
+    return res.status(result.status || 200).json(result)
+  }
+
+  static async createAlbum(req, res, next){
+    const result = await AlbumModel.createAlbum(req.body)
+    return res.status(result.status || 200).json(result)
+  }
+
+  static async updateAlbum(req, res, next){
+    const result = await AlbumModel.updateAlbum({...req.body, id: req.params.id})
+    return res.status(result.status || 200).json(result)
+  }
+
+  static async destroyAlbum(req, res, next){
+    const result = await AlbumModel.destroyAlbum(req.params.id)
+    return res.status(result.status || 200).json(result)
   }
 
   static async getAllImages(req, res, next){
     const result = await ImageModel.getAll()
-    return res.status(200).json(result)
+    return res.status(result.status || 200).json(result)
   }
 
   static async createImage(req, res, next){
     const result = await ImageModel.create(req.body)
-    return res.status(200).json(result)
+    return res.status(result.status || 200).json(result)
   }
 
   static async updateImage(req, res, next){
     const result = await ImageModel.updateImage({...req.body, id: req.params.id})
-    return res.status(200).json(result)
+    return res.status(result.status || 200).json(result)
+  }
+
+  static async destroyImage(req, res, next){
+    const result = await ImageModel.destroyImage(req.params.id)
+    return res.status(result.status || 200).json(result)
   }
 
 }

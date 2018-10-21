@@ -2,12 +2,19 @@ const db = require('../db/knex.js')
 
 class AlbumModel {
 
-  static create(data) {
-    return db('albums').insert(data)
+  static createAlbum(data) {
+    try {
+      const result = db('albums').insert(data).returning('*')
+      console.log('result', result)
+      return result
+    } catch(err){
+      console.log('err', err)
+      return {message: err.message, status: 400}
+    }
   }
 
   static getAll() {
-    return db('albums')
+    return db('albums').returning('*')
   }
 
   static async getOne(albumId) {
@@ -19,12 +26,18 @@ class AlbumModel {
     return album
   }
 
-  static updateAlbumData(albumData) {
+  static async updateAlbum(albumData) {
     const {id} = albumData
-    return db('albums').where({id}).update(albumData)
+    try {
+      const [result] = await db('albums').where({id}).update(albumData).returning('*')
+      return result
+    } catch(err){
+      return {message: err.message, status: 400}
+    }
+    
   }
 
-  static deleteAlbumData(id) {
+  static destroyAlbum(id) {
     return db('albums').where({id}).del()
   }
 
