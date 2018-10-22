@@ -13,6 +13,7 @@ router.get('/images', Controller.getAllImages)
 router.post('/images', Controller.createImage)
 router.post('/images/:id', Controller.updateImage)
 router.delete('/images/:id', Controller.destroyImage)
+router.post('/contact', Controller.contactOwner)
 
 
 module.exports = router

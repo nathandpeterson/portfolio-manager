@@ -7,6 +7,7 @@ exports.up = function(knex, Promise) {
     table.string('description').defaultsTo('')
     table.string('size').defaultsTo('')
     table.string('date').defaultsTo('')
+    table.integer('angle')
     table.timestamps(true, true)
   })
 }
