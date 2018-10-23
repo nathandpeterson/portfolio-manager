@@ -6,19 +6,9 @@ exports.seed = function(knex, Promise) {
       // Inserts seed entries
       return knex('albums').insert([
         { id: 1, 
-          album_name: 'christmas', 
-          album_description: 'christmas stuff',
-          key_image_id: 'test-upload/18304548790_b1a3ef409f_o_xnf6re.jpg'
-        },
-        { id: 2, 
-          album_name: 'life', 
-          album_description: 'life stuff',
-          key_image_id: 'test-upload/hmwvnnahrrjl2e4jqjed.jpg'
-        }, 
-        { id: 3, 
-          album_name: 'birthday', 
-          album_description: 'birthday stuff',
-          key_image_id: 'test-upload/17871569293_8300e87eb4_o_ia9l77.jpg'
+          album_name: '2018', 
+          album_description: '',
+          key_image_id: 'IMG_20181021_100334.jpg'
         }
       ]);
     }).then(() => {
