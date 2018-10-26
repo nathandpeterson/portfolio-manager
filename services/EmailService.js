@@ -16,12 +16,25 @@ const owner = process.env.OWNER_EMAIL
      return transporter
   }
 
+  static composeEmail(body){
+    const {email, name, emailContent} = body
+    return `<p>You recieved an email from ${name} at ${email}.</p>
+              <hr /> 
+              <p>${emailContent}</p>
+        <p>This message was created by a robot server</p>`
+  }
+
   static createEmailOptions(body){
+    const {email, name, emailContent} = body
+    const text = `<p>From: ${email} </p>
+        <p>You recieved an email from ${name}.</p>
+          <hr /> <p>${emailContent}</p>
+        <p>This message was created by a robot server</p>`
     return {
       from: emailUsername,
       to: owner,
       subject: 'Somebody contacted you from your website',
-      html: body
+      html: text
     }
   }
 

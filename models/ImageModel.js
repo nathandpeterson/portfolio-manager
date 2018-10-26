@@ -30,7 +30,7 @@ class ImageModel {
     const [imageDataObject] = updatedImageDataAsArray
     if(albumId){
       const joinData = await this.createOrUpdateImageAlbumData({...imageDataObject, albumId})
-      return {imageDataObject, joinData}
+      return {...imageDataObject, albumId: joinData }
     } else {
       return imageDataObject
     }

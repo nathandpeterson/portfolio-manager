@@ -5,6 +5,7 @@ exports.up = function(knex, Promise) {
     table.foreign('album_id').references('albums.id')
     table.integer('image_id').notNullable()
     table.foreign('image_id').references('images.id')
+    table.integer('sortPosition').defaultsTo('')
   })
 };
 
