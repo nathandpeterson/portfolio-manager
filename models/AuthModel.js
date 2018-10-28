@@ -3,6 +3,7 @@ const UserModel = require('./UserModel')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const secret = process.env.SECRET_PW || 'secret'
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'password'
 
 class AuthModel {
 
@@ -10,7 +11,7 @@ class AuthModel {
     const user = await UserModel.getOne(email)
     if(user.status === 400) return user
     try {
-      if(user.hashed_password === "password" && password === "password") {
+      if(user.hashed_password === ADMIN_PASSWORD && password === ADMIN_PASSWORD) {
         const token = this.sign(user)
         return {status: 200, token, message: 'Time to change your password'}
       }
@@ -44,7 +45,8 @@ class AuthModel {
   }
 
   static verifyToken(data){
-    const authentication = jwt.verify(data.token, secret)
+    const trimmedToken = data.token.slice(7)
+    const authentication = jwt.verify(trimmedToken, secret)
     return authentication
   }
 }

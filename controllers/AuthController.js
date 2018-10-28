@@ -10,11 +10,12 @@ class AuthController {
   }
 
   static async verifyToken(req, res, next){
-    const authentication = await AuthModel.verifyToken(req.body)
-    if(authentication){
-      return res.status(200).json({message: "Token verified"})
-    } else {
-      return res.status(401).json({message: "bad token"})
+    const authentication = await AuthModel.verifyToken(req.headers)
+    try {
+      if(authentication.sub.id) console.log('return obj', {user : authentication.sub.id})
+      next(res.body)
+    } catch(err) {
+      return res.status(401).json({message: "bad token" + err})
     }
   }
 

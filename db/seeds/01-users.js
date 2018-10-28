@@ -1,3 +1,4 @@
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'x1oirfj39-290Am9-9'
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
@@ -9,21 +10,15 @@ exports.seed = function(knex, Promise) {
           first_name: 'nathan', 
           last_name: 'peterson',
           email: 'natperson@gmail.com', 
-          hashed_password: 'password',
+          hashed_password: ADMIN_PASSWORD,
           role: 'DEVELOPER'
         },
         { id: 2, 
           first_name: 'Stephen', 
           last_name: 'Rawls',
-          hashed_password: 'password', 
+          hashed_password: ADMIN_PASSWORD, 
           email: 's2rawls@gmail.com',
           role: 'ADMIN'
-        },
-        { id: 3, 
-          first_name: 'wren', 
-          last_name: 'peterson', 
-          hashed_password: 'pizza',
-          role: 'USER'
         }
       ])
     }).then(() => {

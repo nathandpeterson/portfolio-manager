@@ -4,8 +4,8 @@
   "description": "save metadata associated with photo uploads",
   "main": "app.js",
   "scripts": {
-    "start": "node main",
-    "dev": "nodemon main",
+    "start": "node app",
+    "dev": "nodemon app",
     "knex": "knex",
     "refresh": "dropdb rawls-test && createdb rawls-test",
     "reseed": "knex migrate:latest && knex seed:run"
