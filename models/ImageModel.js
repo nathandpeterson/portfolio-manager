@@ -36,8 +36,23 @@ class ImageModel {
     }
   }
 
-  static destroyImage(id) {
-    return db('images').where({id}).del()
+  static async destroyImage(id) {
+    try {
+      await this.removeImageAlbumRelations(id)
+      const result = await db('images').where({id}).del()
+      return result ? {id} : {error: 'something went wrong'} 
+    } catch (err){
+      return {message: err.message, status: 400}
+    }
+  }
+
+  static async removeImageAlbumRelations(id){
+    try {
+      const result = await db('album_image').where({image_id: id}).del()
+      return result
+    } catch(err){
+      return {message: err.message, status: 400}
+    }
   }
 
   static async createOrUpdateImageAlbumData(imageData) {
