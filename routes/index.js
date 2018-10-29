@@ -14,6 +14,8 @@ router.post('/images', Controller.verifyToken, Controller.createImage)
 router.post('/images/:id', Controller.verifyToken, Controller.updateImage)
 router.delete('/images/:id', Controller.verifyToken, Controller.destroyImage)
 router.post('/contact', Controller.contactOwner)
+router.get('/information', Controller.getInformation)
+router.post('/information', Controller.verifyToken, Controller.updateInformation)
 
 
 module.exports = router

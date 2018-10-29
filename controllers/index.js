@@ -2,6 +2,7 @@ const AuthController = require('./AuthController')
 const AlbumController = require('./AlbumController')
 const ImageController = require('./ImageController')
 const EmailController = require('./EmailController')
+const InformationController = require('./InformationController')
 
 module.exports = {
   login: AuthController.login,
@@ -16,5 +17,7 @@ module.exports = {
   createImage: ImageController.createImage,
   updateImage: ImageController.updateImage,
   destroyImage: ImageController.destroyImage,
-  contactOwner: EmailController
+  contactOwner: EmailController,
+  getInformation: InformationController.getAllInformation,
+  updateInformation: InformationController.updateInformation
 }
