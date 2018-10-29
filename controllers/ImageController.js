@@ -14,7 +14,7 @@ class ImageController {
   }
 
   static async updateImage(req, res, next){
-    const result = await ImageModel.updateImage({...req.body.data, id: req.params.id})
+    const result = await ImageModel.updateImage({...req.body, id: req.params.id})
     return res.status(result.status || 200).json(result)
   }
 

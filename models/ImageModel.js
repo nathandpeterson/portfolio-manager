@@ -23,17 +23,23 @@ class ImageModel {
   }
 
   static async updateImage(data) {
-    
-    const { albumId, ...dataWithoutAlbum } = data
-    const updatedImageDataAsArray = await db('images').where({ id: data.id }).update(dataWithoutAlbum).returning('*')
+    const { albumId, sortPosition, ...dataWithoutAlbum } = data
+    try {
+      const updatedImageDataAsArray = await db('images').where({ id: data.id }).update(dataWithoutAlbum).returning('*')
+      const [imageDataObject] = updatedImageDataAsArray
 
-    const [imageDataObject] = updatedImageDataAsArray
-    if(albumId){
-      const joinData = await this.createOrUpdateImageAlbumData({...imageDataObject, albumId})
-      return {...imageDataObject, albumId: joinData }
-    } else {
-      return imageDataObject
+      if(albumId){
+        const joinData = await this.createOrUpdateImageAlbumData({...imageDataObject, albumId, sortPosition})
+        return {...imageDataObject, albumId: joinData }
+      } else {
+        return imageDataObject
+      }
+
+    } catch(err){
+      return {message: err.message, status: 400}
     }
+   
+   
   }
 
   static async destroyImage(id) {
@@ -57,10 +63,13 @@ class ImageModel {
 
   static async createOrUpdateImageAlbumData(imageData) {
     const joinData = await db('album_image').where({image_id: imageData.id})
+    const { id, albumId, sortPosition } = imageData
     if(joinData.length){
-      return await db('album_image').where({image_id: imageData.id}).update({ image_id: imageData.id, album_id: imageData.albumId })
+      return await db('album_image')
+                      .where({image_id: id})
+                      .update({ image_id: id, album_id: albumId, sortPosition })
     } else {
-      return await db('album_image').insert({ image_id: imageData.id, album_id: imageData.albumId })
+      return await db('album_image').insert({ image_id: imageData.id, album_id: albumId, sortPosition })
     }
   }
 
