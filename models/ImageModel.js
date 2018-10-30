@@ -23,11 +23,13 @@ class ImageModel {
   }
 
   static async updateImage(data) {
+    console.log('data', data)
     const { albumId, sortPosition, ...dataWithoutAlbum } = data
+    console.log('data', dataWithoutAlbum)
     try {
       const updatedImageDataAsArray = await db('images').where({ id: data.id }).update(dataWithoutAlbum).returning('*')
       const [imageDataObject] = updatedImageDataAsArray
-
+      console.log('imageDATA OBJ', imageDataObject)
       if(albumId){
         const joinData = await this.createOrUpdateImageAlbumData({...imageDataObject, albumId, sortPosition})
         return {...imageDataObject, albumId: joinData }
@@ -62,12 +64,13 @@ class ImageModel {
   }
 
   static async createOrUpdateImageAlbumData(imageData) {
+    console.log('----createOrUpdate', imageData)
     const joinData = await db('album_image').where({image_id: imageData.id})
     const { id, albumId, sortPosition } = imageData
     if(joinData.length){
       return await db('album_image')
                       .where({image_id: id})
-                      .update({ image_id: id, album_id: albumId, sortPosition })
+                      .update({ image_id: id, album_id: albumId, sortPosition: sortPosition || id })
     } else {
       return await db('album_image').insert({ image_id: imageData.id, album_id: albumId, sortPosition })
     }

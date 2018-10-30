@@ -12,7 +12,16 @@ class AlbumModel {
   }
 
   static getAll() {
-    return db('albums').returning('*')
+    try {
+      return db('albums').returning('*')
+        .then((albums) => {
+          const promises = albums.map(album =>  this.getOne(album.id))
+          return Promise.all(promises)
+        })
+      
+    } catch(err){
+      return {message: err.message, status: 400}
+    }
   }
 
   static async getOne(albumId) {
