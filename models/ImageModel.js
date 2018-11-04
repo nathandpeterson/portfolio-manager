@@ -22,6 +22,21 @@ class ImageModel {
     }
   }
 
+  static async updateImages(images) {
+    let promises = images.map(image => {
+      const { image_id, album_id, sortPosition } = image
+      return db('album_image')
+        .where({image_id })
+        .update({ image_id , album_id , sortPosition })
+        .returning('*')
+    })
+    try {
+      return Promise.all(promises)
+    } catch(err){
+      return {message: err.message, status: 400}
+    }
+  }
+
   static async updateImage(data) {
     const { albumId, sortPosition, ...dataWithoutAlbum } = data
     try {
@@ -38,8 +53,6 @@ class ImageModel {
     } catch(err){
       return {message: err.message, status: 400}
     }
-   
-   
   }
 
   static async destroyImage(id) {

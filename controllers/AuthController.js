@@ -14,9 +14,9 @@ class AuthController {
     try {
       if(authentication.sub.id) {
         next()
-      }
+      } 
     } catch(err) {
-      return res.status(401).json({message: "bad token" + err})
+      return res.status(401).json({message: err.message})
     }
   }
 

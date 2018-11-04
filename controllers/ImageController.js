@@ -18,6 +18,11 @@ class ImageController {
     return res.status(result.status || 200).json(result)
   }
 
+  static async updateImages(req, res) {
+    const result = await ImageModel.updateImages(req.body)
+    return res.status(result.status || 200).json(result)
+  }
+
   static async destroyImage(req, res, next){
     const result = await ImageModel.destroyImage(req.params.id)
     return res.status(result.status || 200).json(result)

@@ -16,6 +16,7 @@ module.exports = {
   getAllImages: ImageController.getAllImages,
   createImage: ImageController.createImage,
   updateImage: ImageController.updateImage,
+  updateImages: ImageController.updateImages,
   destroyImage: ImageController.destroyImage,
   contactOwner: EmailController,
   getInformation: InformationController.getAllInformation,

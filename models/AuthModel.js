@@ -45,9 +45,15 @@ class AuthModel {
   }
 
   static verifyToken(data){
-    const trimmedToken = data.token.slice(7)
-    const authentication = jwt.verify(trimmedToken, secret)
-    return authentication
+    if(!data.token) return {message: 'Unauthorized', status:401}
+    try {
+      const trimmedToken = data.token.slice(7)
+      const authentication = jwt.verify(trimmedToken, secret)
+      return authentication
+    } catch (err){
+      return {message: 'Unauthorized', status:401}
+    }
+   
   }
 }
 
