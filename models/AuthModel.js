@@ -20,7 +20,7 @@ class AuthModel {
         return {status: 200, message: 'Success', token}
       } else return token
     } catch(error){
-      return { message: 'Wrong password catch', error, status: 401 }
+      return { message: 'Wrong password', error, status: 401 }
     }   
   }
   static async verifyPassword(passwordAttempt, userData){

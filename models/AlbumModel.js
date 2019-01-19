@@ -41,7 +41,7 @@ class AlbumModel {
   static async updateAlbum(albumData) {
     const {id} = albumData
     try {
-      const [result] = await db('albums').where({id}).update(albumData).returning('*')
+      const [result] = await db('albums').where({id}).update({...albumData, updated_at: new Date()}).returning('*')
       const images = await db('images')
                               .join('album_image', 'images.id', 'album_image.image_id')
                               .where({album_id: id})
