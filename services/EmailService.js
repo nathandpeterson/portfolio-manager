@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer')
-const emailUsername = process.env.EMAIL_USERNAME
-const emailPassword = process.env.EMAIL_PASSWORD
-const owner = process.env.OWNER_EMAIL
+const emailUsername = process.env.EMAIL_USERNAME || 'rawlswebsite@gmail.com'
+const emailPassword = process.env.EMAIL_PASSWORD || '8xp-P4x-vBN'
+const owner = process.env.OWNER_EMAIL || 's2rawls@gmail.com'
 
  class EmailService {
 

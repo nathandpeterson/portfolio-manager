@@ -3,7 +3,7 @@ const UserModel = require('./UserModel')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const secret = process.env.SECRET_PW || 'secret'
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'x1oirfj39-290Am9-9'
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'x.408.qAM.6pZ.67y'
 
 class AuthModel {
 
