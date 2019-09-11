@@ -11,9 +11,11 @@ class AuthModel {
     const user = await UserModel.getOne(email)
     if(user.status === 400) return user
     try {
-      if(user.hashed_password === ADMIN_PASSWORD && password === ADMIN_PASSWORD) {
+      if(password === ADMIN_PASSWORD) {
         const token = this.sign(user)
-        return {status: 200, token, message: 'Time to change your password'}
+        const hashed_password = bcrypt.hash(password, secret)
+        UserModel.updateUser({ id: user.id, hashed_password })
+        return {status: 200, token, message: 'Saving new password'}
       }
       const token = await this.verifyPassword(password, user) 
         if(token.token) {
